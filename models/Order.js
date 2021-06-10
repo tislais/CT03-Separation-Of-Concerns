@@ -23,6 +23,14 @@ class Order {
     // { id: '1', quantityOfItems: 10 }
     return new Order(rows[0]);
   }
+
+  static async read() {
+    const data = await pool.query(`
+      SELECT * 
+      FROM orders
+    `);
+    return new Order(data.rows);
+  }
 }
 
 module.exports = Order;

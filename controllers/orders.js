@@ -7,7 +7,31 @@ module.exports = Router() // app.post(....)
     try {
       const order = await Order.insert(req.params.quantity);
       res.send(order);
-    } catch (err) {
+    } catch(err) {
+      res.status(500).send(err);
+    }
+  })
+
+  .get('/api/v1/orders', async (req, res) => {
+    try {
+      const order = await Order.read(req.params.quantity);
+    } catch(err) {
+      res.status(500).send(err);
+    }
+  })
+
+  .put('/api/v1/orders', async (req, res) => {
+    try {
+      const order = await Order.read(req.params.quantity);
+    } catch(err) {
+      res.status(500).send(err);
+    }
+  })
+
+  .delete('/api/v1/orders', async (req, res) => {
+    try {
+      const order = await Order.read(req.params.quantity);
+    } catch(err) {
       res.status(500).send(err);
     }
   });
