@@ -34,24 +34,18 @@ module.exports = Router() // app.post(....)
     }
   })
 
-  // update quantity
+  // put
+  .put('/api/v1/orders/:id', async (req, res) => {
+    try {
+      const order = await Order.update(req.params.id, req.params.quantityOfItems);
+      req.send(order);
+    } catch(err) {
+      res.status(500).send(err);
+    }
+  })
+
 
   // delete item by id
 
-  // .put('/api/v1/orders/:id', async (req, res) => {
-  //   try {
-  //     const order = await Order.read(req.params.quantity);
-  //   } catch(err) {
-  //     res.status(500).send(err);
-  //   }
-  // })
 
-  // .delete('/api/v1/orders/:id', async (req, res) => {
-  //   try {
-  //     const order = await Order.read(req.params.quantity);
-  //   } catch(err) {
-  //     res.status(500).send(err);
-  //   }
-  // })
-  
 ;

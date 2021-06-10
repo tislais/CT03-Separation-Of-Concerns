@@ -1,4 +1,5 @@
 const pool = require('pool');
+const orders = require('../controllers/orders');
 
 // 1. define the shape of our data
 // 2. define methods to access that data (CRUD)
@@ -35,10 +36,23 @@ class Order {
   }
 
   static async getAll() {
-    const { rows } = await pool.query(
-      'SELECT * FROM orders'
+    const { rows } = await pool.query(`
+      SELECT * FROM orders
+    `
     );
     return new Order(rows);
+  }
+
+  static async update(id, quantityOfItems) {
+    const data = await pool.query(`
+      UPDATE orders
+      SET (quantity_of_items)
+      WHERE id = $1
+      RETURNING *
+    `,
+    [quantityOfItems, id]
+    );
+    return new Order(data.rows[0]);
   }
 }
 
