@@ -46,6 +46,13 @@ module.exports = Router() // app.post(....)
 
 
   // delete item by id
-
+  .delete('/api/v1/orders/:id', async (req, res) => {
+    try {
+      const order = await Order.delete(req.params.id);
+      req.send(order);
+    } catch(err) {
+      res.status(500).send(err);
+    }
+  })
 
 ;

@@ -1,5 +1,4 @@
 const pool = require('pool');
-const orders = require('../controllers/orders');
 
 // 1. define the shape of our data
 // 2. define methods to access that data (CRUD)
@@ -52,6 +51,16 @@ class Order {
     `,
     [quantityOfItems, id]
     );
+    return new Order(data.rows[0]);
+  }
+
+  static async delete(id) {
+    const data = await pool.query(`
+      DELETE FROM orders
+      WHERE id = $1
+      RETURNING id, quantity_of_items as "quantityOfItems"
+    `,
+    [id]);
     return new Order(data.rows[0]);
   }
 }
