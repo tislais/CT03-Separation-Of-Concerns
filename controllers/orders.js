@@ -14,13 +14,13 @@ module.exports = Router() // app.post(....)
 
   .get('/api/v1/orders', async (req, res) => {
     try {
-      const order = await Order.read(req.params.quantity);
+      const order = await Order.select(req.params.quantity);
     } catch(err) {
       res.status(500).send(err);
     }
   })
 
-  .put('/api/v1/orders', async (req, res) => {
+  .put('/api/v1/orders/:id', async (req, res) => {
     try {
       const order = await Order.read(req.params.quantity);
     } catch(err) {
@@ -28,7 +28,7 @@ module.exports = Router() // app.post(....)
     }
   })
 
-  .delete('/api/v1/orders', async (req, res) => {
+  .delete('/api/v1/orders/:id', async (req, res) => {
     try {
       const order = await Order.read(req.params.quantity);
     } catch(err) {

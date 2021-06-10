@@ -24,12 +24,13 @@ class Order {
     return new Order(rows[0]);
   }
 
-  static async read() {
+  static async select(id) {
     const data = await pool.query(`
-      SELECT * 
+      SELECT id, quantity_of_items as "quantityOfItems" 
       FROM orders
-    `);
-    return new Order(data.rows);
+      WHERE id = $1
+    `, [id]);
+    return new Order(data.rows[0]);
   }
 }
 
