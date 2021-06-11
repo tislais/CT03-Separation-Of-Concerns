@@ -7,7 +7,7 @@ module.exports = Router() // app.post(....)
   // post 
   .post('/api/v1/orders', async (req, res) => {
     try {
-      const order = await Order.insert(req.params.quantityOfItems);
+      const order = await Order.insert(req.body.quantity);
       res.send(order);
     } catch(err) {
       res.status(500).send(err);
